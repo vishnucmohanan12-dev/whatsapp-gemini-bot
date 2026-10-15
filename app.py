@@ -75,7 +75,7 @@ def chat_with_memory(sender_id: str, new_message: str) -> str:
     )
 
     response = ai_client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.0-flash",
         contents=SESSIONS[sender_id],
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
@@ -104,7 +104,11 @@ def send_whatsapp_message(to_number: str, message_text: str):
         "type": "text",
         "text": {"body": message_text},
     }
-    requests.post(url, headers=headers, json=payload)
+    
+    response = requests.post(url, headers=headers, json=payload)
+print("WhatsApp API Status:", response.status_code, response.text)
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
