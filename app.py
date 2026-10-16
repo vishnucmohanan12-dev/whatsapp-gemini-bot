@@ -37,7 +37,7 @@ def chat_with_memory(sender_id: str, new_message: str) -> str:
     )
 
     response = ai_client.models.generate_content(
-        model="gemini-3.0-flash",
+        model="gemini-2.0-flash",
         contents=SESSIONS[sender_id],
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
